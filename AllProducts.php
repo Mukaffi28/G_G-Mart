@@ -20,7 +20,11 @@
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
+<!-- Mukaffi -->
+   
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#heart1").click(function () {
