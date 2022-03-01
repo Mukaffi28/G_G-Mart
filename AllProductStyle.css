@@ -11,6 +11,16 @@ flex-basis: 19%;
 
 
 }
+.side {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-basis: 19%;
+  justify-content: space-around;
+  width: 20%;
+ 
+ 
+}
 .menu-side{
   color: white;
   width: 28px;
@@ -25,7 +35,17 @@ flex-basis: 19%;
           }
         .menu-side{
           display: block;
+          cursor: pointer;
         }
+        .side{
+          display: none;
+         
+      
+        }
+          .mainbody{
+            flex-basis: 100%;
+            overflow: hidden;
+          }
          
         }
 @media only screen and (max-width:1200px){
@@ -169,34 +189,8 @@ flex-basis: 19%;
   }
 
 
-  @media only screen and (max-width:1415px){
-    
-  .side{
-    display: none;
-    width: 0px;
-    height: 0px;
 
-  }
-    .mainbody{
-      flex-basis: 100%;
-      overflow: hidden;
-    }
-    .menu-side{
-      display: block;
-      cursor: pointer;
-    }
- 
-  }
 
    
+ 
 
-/* .rowh {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-  .rowh .card-img-top {
-    height: 250px;
-    width: 100%;
-  } */
