@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
-
+<?php
+$conn = new mysqli('localhost', 'root', '','marks');
+?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,24 +20,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="HomeStyle.css">
+   
     <title>Grab & Go!</title>
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#heart").click(function () {
-                if ($("#heart").hasClass("liked")) {
-                    $("#heart").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-                    $("#heart").removeClass("liked");
-                } else {
-                    $("#heart").html('<i class="fa fa-heart" aria-hidden="true"></i>');
-                    $("#heart").addClass("liked");
-                }
-            });
-        });
-    </script>
+
     <div class="header">
 
 
@@ -50,8 +40,8 @@
                 <nav>
                     <ul id="Menuitems">
                         <li><i class="fas fa-search searchicon"></i></li>
-                        <li><a href="FrontPage.html">Home</a></li>
-                        <li><a href="AllProducts.html" class="">Product</a></li>
+                        <li><a href="Front.php">Home</a></li>
+                        <li><a href="AllProducts.php" class="">Product</a></li>
                         <li><a href="" class="">About</a></li>
                         <li><a href="#" class="">Contact</a></li>
                         <li><a href="#" class="">Account</a></li>
@@ -127,71 +117,27 @@
         <h3 align="center">Featured Category</h3>
         <p align="center" style="margin-bottom: 10px;"> Get Your Desired Product from Featured Category!</p>
         <div class="rowh">
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/category1.webp " >
-                    </figure>
-
-                </div>
-                <div class="card-body">
+           <?php
 
 
-                    <a href="#" class="btn ">Electronics </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/laptop.jpg">
-                    </figure>
+$servername = "localhost"; 
+    $username = "root"; 
+    $password = "";
+    $dbname = "marks"; 
+    // Create connection 
+    $conn = mysqli_connect($servername, $username, $password, $dbname); 
+    $id= $_GET['id'];
+    $sql = "SELECT * FROM category ";
+    
 
-                </div>
-                <div class="card-body">
+           
+$result = mysqli_query($conn, $sql); 
+if ($result->num_rows > 0) {
+// output data of each row
+while($row = $result->fetch_assoc()) {
+ $name = $row['Name'];
+  ?>
 
-
-                    <a href="#" class="btn ">Computers </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/arts.jpg">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn ">Arts & Craft </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/beauty.jpg">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn ">Beauty & Care </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/Kitchen.jpg">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn ">Home & Kitchen </a>
-                </div>
-            </div>
             <div class="card text-center" style="width: 18rem;">
                 <div id="zoom-IN">
                     <figure>
@@ -202,61 +148,10 @@
                 <div class="card-body">
 
 
-                    <a href="#" class="btn ">Man's Wear</a>
+                    <a href="AllProductsSortCategories.php?id=Menswear" class="btnP"><?php echo $name; ?></a>
                 </div>
             </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/women.jpg">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn ">Women's Wear </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/kids.webp">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn ">Kids Wear </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/Health.jpg">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn ">Health </a>
-                </div>
-            </div>
-            <div class="card text-center" style="width: 18rem;">
-                <div id="zoom-IN">
-                    <figure>
-                        <img class="card-img-top" src="images/Features Catagory/pets.jpg">
-                    </figure>
-
-                </div>
-                <div class="card-body">
-
-
-                    <a href="#" class="btn">Pet Supplies </a>
-                </div>
-            </div>
+           
         </div>
     </div>
     <h3 align="center">Happy Customers!</h3>
