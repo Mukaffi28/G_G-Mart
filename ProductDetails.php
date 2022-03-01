@@ -1,3 +1,36 @@
+<?php
+$servername = "localhost"; 
+$username = "root"; 
+$password = "";
+$dbname = "marks"; 
+// Create connection 
+$conn = mysqli_connect($servername, $username, $password, $dbname); 
+$id= $_GET['id'];
+$sql = "SELECT * FROM product where ProductID= '".$id."' ";
+$result = mysqli_query($conn, $sql); 
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+    $name = $row['PrductName'];
+      $PID = $row['ProductID'];
+       $price = $row['ProductPrice'];
+        $image = $row['ProductImage'];
+        $image1 = $row['ProductImg1'];
+        $image2 = $row['ProductImg2'];
+        $image3 = $row['ProductImg3'];
+        $image4 = $row['ProductImg4'];
+        $details = $row['ProductDes'];
+        $cat= $row['ProductCategory'];
+}
+?>
+
+<?php } 
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +65,7 @@
 <body>
     <?php include 'TopMenu.php'; ?>
 
-
+    
 
     <!-- Single Product Details -->
 
@@ -40,28 +73,28 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 colClass">
                 <div class="row">
-                    <img src="images/gallery-1.jpg" width=100% id="productImg">
+                    <img src="<?php echo $image1; ?>" width=100% id="productImg">
                 </div>
                     <br>
                 <div class="row small_pic">
                     <div class="col small_pic_col">
-                        <img src="images/gallery-2.jpg" width=100% class="smallProductImg">
+                        <img src="<?php echo $image1; ?>" width=100% class="smallProductImg">
                     </div>
                     <div class="col small_pic_col">
-                        <img src="images/gallery-3.jpg" width=100% class="smallProductImg">
+                        <img src="<?php echo $image2; ?>" width=100% class="smallProductImg">
                     </div>
                     <div class="col small_pic_col">
-                        <img src="images/gallery-4.jpg" width=100% class="smallProductImg">
+                        <img src="<?php echo $image3; ?>" width=100% class="smallProductImg">
                     </div>
                     <div class="col small_pic_col">
-                        <img src="images/gallery-1.jpg" width=100% class="smallProductImg">
+                        <img src="<?php echo $image4; ?>" width=100% class="smallProductImg">
                     </div>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 colClass">
-                <p>Home/Laptop</p>
-                <h1>Red T-Shirt</h1>
-                <h4>300৳</h4>
+                <p>Home/<?php echo $cat; ?></p>
+                <h1><?php echo $name; ?></h1>
+                <h4><?php echo $price; ?> ৳</h4>
                 <select>
                     <option>Select Size</option>
                     <option>XXl</option>
@@ -84,17 +117,18 @@
                             document.getElementById('in').stepDown();
                         }
                     </script>
+                    <a href="" class="btnH">Add to Cart</a>
                 </div>
-                <br> <a href="" class="btnP">Add to cart </a>
+                <br> 
                 <h3>Product Details</h3><br>
-                <p>Maroon printed T-shirt, has a round neck, and short sleeves<br>Material: 100%Cotton <br>
-                    Machine Wash</p>
+                <p><?php echo $details; ?></p>
+                
             </div>
         </div>
         <!-------- End of showing Single Product ---------->
 
 
-
+                        
     </div>
 
     <div class="cat2">
