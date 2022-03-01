@@ -21,7 +21,7 @@
 <div class="header">
 
 
-<div class="container">
+<div class="containers">
 
     <div class="navbar">
         <div class="logo">
@@ -33,11 +33,11 @@
         <nav>
             <ul id="Menuitems">
 
-                <li><a href="FrontPage.html">Home</a></li>
-                <li><a href="AllProducts.html" class="">Product</a></li>
-                <li><a href="" class="">About</a></li>
-                <li><a href="#" class="">Contact</a></li>
-                <li><a href="#" class="">Account</a></li>
+                <li><a href="Front.php">Home</a></li>
+                <li><a href="AllProducts.php" class="">Product</a></li>
+                <li><a href="AboutUs.php" class="">About</a></li>
+                <li><a href="contactUs.php" class="">Contact</a></li>
+                <li><a href="signup.php" class="">Account</a></li>
 
 
             </ul>
