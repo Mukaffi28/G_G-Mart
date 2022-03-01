@@ -20,38 +20,11 @@
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#heart1").click(function () {
-                if ($("#heart1").hasClass("liked")) {
-                    $("#heart1").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-                    $("#heart1").removeClass("liked");
-                } else {
-                    $("#heart1").html('<i class="fa fa-heart" aria-hidden="true"></i>');
-                    $("#heart1").addClass("liked");
-                }
-            });
-            $("#heart").click(function () {
-                if ($("#heart").hasClass("liked")) {
-                    $("#heart").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-                    $("#heart").removeClass("liked");
-                } else {
-                    $("#heart").html('<i class="fa fa-heart" aria-hidden="true"></i>');
-                    $("#heart").addClass("liked");
-                }
-            });
-            $("#heart2").click(function () {
-                if ($("#heart2").hasClass("liked")) {
-                    $("#heart2").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-                    $("#heart2").removeClass("liked");
-                } else {
-                    $("#heart2").html('<i class="fa fa-heart" aria-hidden="true"></i>');
-                    $("#heart2").addClass("liked");
-                }
-            });
-        });
-    </script>
+
+
+<!-- Mukaffi -->
+   
+
 
     
    
@@ -66,27 +39,88 @@
                     <h2>Price Range</h2>
                     <p>Use slider or enter min and max price</p>
                 </header>
-                <div class="price-input">
+                <form action="AllProductsSortMoney.php" method="get" >
+                <div class="price-input" >
                     <div class="field">
-                        <span>Min ৳</span>
-                        <input type="number" class="input-min" value="300">
+                   
+    
+             <span>Min ৳</span> <br>
+                        <input type="number" class="input-min" name="Min" value="2500">
+        
+                        
                     </div>
+                    
                     <div class="separator">-</div>
                     <div class="field">
                         <span>Max ৳</span>
-                        <input type="number" class="input-max" value="7500">
+                        <input type="number" class="input-max" name="Max" value="7500">
                     </div>
-                </div>
+                </div> 
                 <div class="slider">
                     <div class="progress"></div>
                 </div>
-                <div class="range-input">
-                    <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+        
+              
+                <div class="range-input" >
+                    <input type="range" class="range-min"  min="0" max="10000" value="2500" step="100">
                     <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+               
                 </div>
+                 <br> 
+                    <div class="submit"  align="center">
+                        <input type="submit">
+                    </div>
+                
+               
+                </form >
+               
+                <script >
+                  
+                    const rangeInput = document.querySelectorAll(".range-input input"),
+priceInput = document.querySelectorAll(".price-input input"),
+
+range = document.querySelector(".slider .progress");
+let priceGap = 300;
+priceInput.forEach(input =>{
+    input.addEventListener("input", e =>{
+        let minPrice = parseInt(priceInput[0].value),
+        maxPrice = parseInt(priceInput[1].value);
+        
+        if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
+            if(e.target.className === "input-min"){
+                rangeInput[0].value = minPrice;
+                range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+            }else{
+                rangeInput[1].value = maxPrice;
+                range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+            }
+        }
+    });
+});
+rangeInput.forEach(input =>{
+    input.addEventListener("input", e =>{
+        let minVal = parseInt(rangeInput[0].value),
+        maxVal = parseInt(rangeInput[1].value);
+        if((maxVal - minVal) < priceGap){
+            if(e.target.className === "range-min"){
+                rangeInput[0].value = maxVal - priceGap
+            }else{
+                rangeInput[1].value = minVal + priceGap;
+            }
+        }else{
+            priceInput[0].value = minVal;
+            priceInput[1].value = maxVal;
+            range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+            range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+        }
+    });
+});
+
+                </script>
                 <!-- Sorting Part  -->
                 <script src="script.js"></script>
-                <header>
+
+
                     <h2 class="review">Customer Review</h2>
                     <div class="rating hov">
                         <i class="fa fa-star"></i>
@@ -119,11 +153,11 @@
                 </header>
                 <header class="review">
                     <h2>Category</h2>
-                    <input type="checkbox" id="Category1" name="Category1" value="Menswear">
-                    <label for="Category1"> Man's Wear </label><br>
-                    <input type="checkbox" id="Category1" name="Category2" value="WomensWear">
-                    <label for="Category2"> Women's Wear</label><br>
-                    <input type="checkbox" id="Category3" name="Category3" value="Children">
+                    <input type="checkbox" id="Menswear" name="Menswear" value="Menswear">
+                    <label for="Menswear"> Man's Wear </label><br>
+                    <input type="checkbox" id="WomensWear" name="WomensWear" value="WomensWear">
+                    <label for="WomensWear"> Women's Wear</label><br>
+                    <input type="checkbox" id="Children" name="Children" value="Children">
                     <label for="Category3"> Kids Wear</label><br>
                     <input type="checkbox" id="Category4" name="Category4" value="Children">
                     <label for="Category4"> Electronics </label><br>
@@ -157,7 +191,7 @@
 
 
 
-
+       
 
 
         <div class="mainbody">
@@ -175,120 +209,75 @@
             </div>
             <div class="rowShow" id="r">
 
-                <div class="card" style="width: 18rem;">
-                    <div id="zoom-IN">
-                        <figure> <a href="Product_Details.html">
-                                <img class="card-img-top" src="images/product-1.jpg"> </a>
 
+                <?php
+
+
+$servername = "localhost"; 
+		$username = "root"; 
+		$password = "";
+		$dbname = "marks"; 
+		// Create connection 
+		$conn = mysqli_connect($servername, $username, $password, $dbname); 
+$sql = "SELECT * FROM product";
+$result = mysqli_query($conn, $sql); 
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+     $name = $row['PrductName'];
+      $PID = $row['ProductID'];
+       $price = $row['ProductPrice'];
+        $image = $row['ProductImage'];
+  
+            ?>
+   <div class="card" style="width: 18rem;">
+           <div id="zoom-IN">
+           
+           <figure>  <a href="ProductDetails.php?id=<?php echo $PID; ?>">
+           <img class="card-img-top" src="<?php echo $image; ?>"> </a>
                         </figure>
-                        <div class="card-body">
-                            <h5 class="card-title"> Red Printed shirt </h5>
-                            <p class="card-text">৳300</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </div>
-
-                            <a href="" class="btnP ">Add to Cart</a>
-                            <span class="btnH" id="heart1"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="card" style="width: 18rem;">
-                    <div id="zoom-IN">
-                        <figure>
-                            <img class="card-img-top" src="images/product-2.jpg">
-                        </figure>
-                        <div class="card-body">
-                            <h5 class="card-title"> HRX Black Running Shoes </h5>
-                            <p class="card-text">৳1800</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </div>
-
-                            <a href="" class="btnP ">Add to Cart</a>
-                            <span class="btnH" id="heart"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div id="zoom-IN">
-                        <figure>
-                            <img class="card-img-top" src="images/product-3.jpg">
-                        </figure>
-                        <div class="card-body">
-                            <h5 class="card-title"> Men Charcoal Grey Solid Rapid-Dry Track Pants </h5>
-                            <p class="card-text">৳300</p>
-                            <div class="rating">
+                        
+           <div class="card-body">
+                            <h5 class="card-title">  <?php echo $name; ?> </h5>
+              <p class="card-text">৳ <?php echo $price; ?> </p>
+              <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-half-o"></i>
                                 <i class="fa fa-star-o"></i>
                             </div>
-
-                            <a href="" class="btnP ">Add to Cart</a>
-                            <span class="btnH" id="heart2"><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-
+             
+                <a href="ProductDetails.php?id=<?php echo $PID; ?>" class="btnP ">Add to Cart</a>
+               <span class="btnH" id=<?php echo $PID; ?>><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
+             
                         </div>
                     </div>
                 </div>
-                <div class="card" style="width: 18rem;">
-                    <div id="zoom-IN">
-                        <figure>
-                            <img class="card-img-top" src="images/product-4.jpg">
-                        </figure>
-                        <div class="card-body">
-                            <h5 class="card-title"> Polo T-shirt </h5>
-                            <p class="card-text">৳300</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
+  
+                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#<?php echo $PID; ?>").click(function () {
+            if ($("#<?php echo $PID; ?>").hasClass("liked")) {
+                $("#<?php echo $PID; ?>").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+                $("#<?php echo $PID; ?>").removeClass("liked");
+            } else {
+                $("#<?php echo $PID; ?>").html('<i class="fa fa-heart" aria-hidden="true"></i>');
+                $("#<?php echo $PID; ?>").addClass("liked");
+            }
+        });
+     
+       
+    });
+</script>
+  
+  
+  <?php } 
 
-                            <a href="" class="btnP ">Add to Cart</a>
-                            <span class="btnH" id=heart><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div id="zoom-IN">
-                        <figure>
-                            <img class="card-img-top" src="images/product-5.jpg">
-                        </figure>
-                        <div class="card-body">
-                            <h5 class="card-title"> High-Top Trekking Shoes </h5>
-                            <p class="card-text">৳1200</p>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
 
-                            <a href="" class="btnP ">Add to Cart</a>
-                            <span class="btnH" id=heart><i class="fa fa-heart-o" aria-hidden="true"></i> </span>
-
-                        </div>
-                    </div>
-                </div>
+} ?>
 
 
 
